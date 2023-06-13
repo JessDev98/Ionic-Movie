@@ -1,0 +1,154 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="flex items-center bg-slate-900 py-2.5">
+
+        <div class="ml-3 cursor-pointer relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path class="dark:stroke-white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </div>
+
+        <div class="mx-auto flex items-center space-x-2">
+          <ion-icon class="text-3xl" name="film-outline"></ion-icon>
+          <h1 class="font-bold mt-3">YoMovie</h1>
+        </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="max-w-full mt-6 mx-3">
+
+    <form class="flex items-center">
+    
+      <div class="relative w-full">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+        </div>
+
+        <input type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+        placeholder="Buscar pelicula o serie" 
+        required>
+      </div>
+
+      <!-- <button type="submit" class="p-2.5 ml-2 text-sm font-medium bg-purple-300">
+        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+      </button> -->
+    </form>
+  </div>
+
+  <div class="mx-3 mt-6 max-w-full justify-center items-center">
+    <div class="relative">
+      
+
+            <div class="flex items-center justify-between ">
+              <div class="flex">
+                  <p class="text-lg font-semibold">Nuevo</p>
+              </div>
+            </div>
+
+            <div class="relative mt-3 w-full">
+                <img src="https://asianwiki.com/images/5/58/Black_Knight_Netflix-001.jpg" class="h-64 w-full rounded-xl object-center" alt="">
+                <button class="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer">
+                    <div class="flex h-full w-full items-center justify-center rounded-full text-xl">
+                      <ion-icon class="text-black" name="eye-outline"></ion-icon>
+                    </div>
+                </button>
+            </div>
+       
+           
+        
+    </div>
+</div>
+
+<!-- component -->
+<div class="flex mt-6 items-center">
+  <div class="mx-3 align-middle">
+        <div class="grid grid-cols-3 gap-3">
+
+          <div class="rounded-lg py-3 px-5 bg-gray-400">
+            <div class="flex text-center justify-center flex-row items-center">
+              <div>
+                <h6 class="text-2xl text-black">Acción</h6>
+                <h4 class="text-black text-4xl font-bold">33</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-lg py-3 px-5 bg-gray-400">
+            <div class="flex text-center justify-center flex-row items-center">
+              <div>
+                <h6 class="text-2xl text-black">Comedia</h6>
+                <h4 class="text-black text-4xl font-bold">41</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="shadow rounded-lg py-3 px-5 bg-gray-400">
+            <div class="flex flex-row text-center justify-center items-center">
+              <div>
+                <h6 class="text-2xl text-black">Terror</h6>
+                <h4 class="text-black text-4xl font-bold">41</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+<!-- component -->
+<div class="mt-6 flex items-center justify-center">
+
+  <div class="grid grid-cols-6 gap-3">
+
+    <div class="col-span-6">
+        <p class="text-lg font-semibold">Populares</p>
+    </div>
+
+    <!-- Card 1 -->
+    <div class="col-span-3 w-44" *ngFor="let p of movies" expand="block" (click)="setOpen(true)" (click)="getDetalle(p.id)">
+      
+      <img src="https://image.tmdb.org/t/p/original{{p.poster_path}}" class="rounded-xl w-44 object-center h-56"/>
+
+      <p class="text-base mt-0.5">{{p.original_title}}</p>
+
+      <p class="text-sm mt-0.5">{{p.popularity}}</p>
+    </div>
+
+    
+    <ion-modal [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Modal</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpen(false)">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
+          <div class="col-span-3 w-full">
+      
+            <img src="https://image.tmdb.org/t/p/original{{detalle.poster_path}}" class="rounded-xl w-full object-center h-96"/>
+      
+            <p class="text-base mt-0.5">{{detalle.original_title}}</p>
+      
+            <p class="text-sm mt-0.5">{{detalle.popularity}}</p>
+
+            <p>
+              {{detalle.overview}}
+            </p>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+  </div> 
+
+</div>
+
+</ion-content>
